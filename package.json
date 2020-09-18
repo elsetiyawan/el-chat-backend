@@ -1,0 +1,45 @@
+{
+  "name": "chat-backend",
+  "version": "1.0.0",
+  "description": "Backend API for el chat message",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mongodb",
+    "mongoose",
+    "socket.io"
+  ],
+  "author": "eL Setiyawan",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-validation": "^3.0.6",
+    "helmet": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.5",
+    "mongoose-aggregate-paginate-v2": "^1.0.42",
+    "mongoose-delete": "^0.5.2",
+    "mongoose-document-log": "^1.0.2",
+    "mongoose-paginate-v2": "^1.3.9",
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.0"
+  }
+}
