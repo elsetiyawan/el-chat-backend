@@ -8,7 +8,7 @@ const {
 
 mongoose.Promise = global.Promise;
 
-mongoose.set("debug", env === "development");
+// mongoose.set("debug", env === "development");
 
 mongoose.connection.on("error", (err) => {
   console.log(`MongoDB Connection Error ${err}`);

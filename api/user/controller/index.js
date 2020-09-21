@@ -2,6 +2,5 @@
 
 module.exports = {
   listUserController: require("./listUserController"),
-  createUserController: require("./createUserController"),
-  loginUserController: require("./loginUserController"),
+  loginOrRegisterController: require("./loginOrRegisterController"),
 };

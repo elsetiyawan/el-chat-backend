@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-  registerUserValidation: require("./registerUserValidation"),
+  loginOrRegisterValidation: require("./loginOrRegisterValidation"),
 };

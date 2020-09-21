@@ -1,14 +1,57 @@
 "use strict";
 
-const { listUserController } = require("../api/user/controller");
-const verifyToken = require("../middleware/verifyToken");
+const { validate } = require("express-validation");
+const {
+  listUserController,
+  loginOrRegisterController,
+} = require("../api/user/controller");
+const { loginOrRegisterValidation } = require("../api/user/validation");
+const verifySecret = require("../middleware/verifySecret");
 
 const userRouter = require("express").Router();
 
 /**
  * @swagger
+ * /v1/users/login-or-register:
+ *  post:
+ *    security:
+ *      - ApiKeyAuth: []
+ *    tags:
+ *      - users
+ *    summary: register users
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              userId:
+ *                type: string
+ *                required: true
+ *              name:
+ *                type: string
+ *              password:
+ *                type: string
+ *              avatar:
+ *                type: string
+ *    responses:
+ *      '200':
+ *         description: login or register user
+ */
+userRouter.post(
+  "/login-or-register",
+  verifySecret(),
+  validate(loginOrRegisterValidation, {}, { abortEarly: false }),
+  loginOrRegisterController
+);
+
+/**
+ * @swagger
  * /v1/users:
  *  get:
+ *    security:
+ *      - ApiKeyAuth: []
  *    tags:
  *      - users
  *    summary: list of all users registered
@@ -19,21 +62,6 @@ const userRouter = require("express").Router();
  *      required: false
  *      schema:
  *        type: string
- *    - name: _order
- *      in : query
- *      description: field to order
- *      required: false
- *      schema:
- *        type: string
- *    - name: _sort
- *      in : query
- *      description: sorting
- *      required: false
- *      schema:
- *        type: string
- *        enum:
- *        - asc
- *        - desc
  *    - name: _page
  *      in : query
  *      description: page
@@ -50,6 +78,6 @@ const userRouter = require("express").Router();
  *      '200':
  *         description: all users
  */
-userRouter.get("/", verifyToken(), listUserController);
+userRouter.get("/", verifySecret(), listUserController);
 
 module.exports = userRouter;

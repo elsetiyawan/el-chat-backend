@@ -8,13 +8,19 @@ const mongooseDelete = require("mongoose-delete");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongooseHistory = require("mongoose-document-log");
+const workspaceModel = require("./workspaceModel");
+const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String, required: true, unique: true, max: 150 },
-    username: { type: String, required: true, unique: true, max: 100 },
-    name: { type: String, max: 150 },
-    password: { type: String, select: false },
+    userId: { type: String, required: true, unique: true, max: 150 },
+    name: { type: String, required: true, max: 150 },
+    avatar: { type: String },
+    _workspaceId: {
+      type: Schema.Types.ObjectId,
+      ref: workspaceModel,
+      select: false,
+    },
   },
   { timestamps: true }
 );
