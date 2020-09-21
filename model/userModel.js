@@ -9,12 +9,15 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongooseHistory = require("mongoose-document-log");
 
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true, max: 150 },
-  username: { type: String, required: true, unique: true, max: 100 },
-  fullName: { type: String, max: 150 },
-  password: { type: String },
-});
+const userSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true, max: 150 },
+    username: { type: String, required: true, unique: true, max: 100 },
+    name: { type: String, max: 150 },
+    password: { type: String, select: false },
+  },
+  { timestamps: true }
+);
 
 // bcrype password in save and update
 userSchema.pre("save", async function save(next) {

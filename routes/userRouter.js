@@ -1,9 +1,9 @@
 "use strict";
 
 const { listUserController } = require("../api/user/controller");
+const verifyToken = require("../middleware/verifyToken");
 
 const userRouter = require("express").Router();
-
 
 /**
  * @swagger
@@ -50,6 +50,6 @@ const userRouter = require("express").Router();
  *      '200':
  *         description: all users
  */
-userRouter.get("/", listUserController);
+userRouter.get("/", verifyToken(), listUserController);
 
 module.exports = userRouter;
