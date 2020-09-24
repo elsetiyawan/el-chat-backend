@@ -14,12 +14,13 @@ const roomSchema = new mongoose.Schema(
   {
     roomName: { type: String, required: true, max: 150 },
     creator: { type: String },
-    participants: [{ type: String }],
+    participants: [{ type: Schema.Types.ObjectId, ref: userModel }],
     _workspaceId: {
       type: Schema.Types.ObjectId,
       ref: workspaceModel,
       select: false,
     },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
@@ -42,4 +43,4 @@ roomSchema.plugin(mongooseDelete, {
   overrideMethods: "all",
 });
 
-module.exports = mongoose.model("m_workspaces", roomSchema);
+module.exports = mongoose.model("t_rooms", roomSchema);

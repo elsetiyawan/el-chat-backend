@@ -29,6 +29,9 @@ const userRouter = require("express").Router();
  *              userId:
  *                type: string
  *                required: true
+ *              username:
+ *                type: string
+ *                required: true
  *              name:
  *                type: string
  *              password:

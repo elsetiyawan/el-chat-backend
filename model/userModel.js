@@ -13,8 +13,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
   {
-    userId: { type: String, required: true, unique: true, max: 150 },
-    name: { type: String, required: true, max: 150 },
+    username: { type: String, required: true, max: 150 },
+    name: { type: String, max: 150 },
     avatar: { type: String },
     _workspaceId: {
       type: Schema.Types.ObjectId,
