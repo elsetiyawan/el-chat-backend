@@ -24,7 +24,7 @@ exports.validateExist = async (mongooseId, type) => {
     default:
       break;
   }
-  console.log(isExist);
+
   if (!isExist)
     throw new APIError({ message: "Id not found", status: BAD_REQUEST });
 };

@@ -4,6 +4,7 @@ const { validate } = require("express-validation");
 const {
   listUserController,
   loginOrRegisterController,
+  readUserController
 } = require("../api/user/controller");
 const { loginOrRegisterValidation } = require("../api/user/validation");
 const verifySecret = require("../middleware/verifySecret");
@@ -82,5 +83,27 @@ userRouter.post(
  *         description: all users
  */
 userRouter.get("/", verifySecret(), listUserController);
+
+/**
+ * @swagger
+ * /v1/users/{roomId}:
+ *  get:
+ *    security:
+ *      - ApiKeyAuth: []
+ *    tags:
+ *      - users
+ *    summary: read user
+ *    parameters:
+ *    - name: userId
+ *      in: path
+ *      description: userId to read
+ *      required: true
+ *      schema:
+ *        type: string
+ *    responses:
+ *      '200':
+ *         description: user detail
+ */
+userRouter.get("/:userId", verifySecret(), readUserController);
 
 module.exports = userRouter;
