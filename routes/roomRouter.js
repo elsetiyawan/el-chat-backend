@@ -1,7 +1,10 @@
 "use strict";
 
 const { validate } = require("express-validation");
-const { createRoomController } = require("../api/room/controller");
+const {
+  createRoomController,
+  readRoomController,
+} = require("../api/room/controller");
 const { createRoomValidation } = require("../api/room/validation");
 const verifySecret = require("../middleware/verifySecret");
 
@@ -43,5 +46,27 @@ roomRouter.post(
   validate(createRoomValidation, {}, { abortEarly: false }),
   createRoomController
 );
+
+/**
+ * @swagger
+ * /v1/rooms/{roomId}:
+ *  get:
+ *    security:
+ *      - ApiKeyAuth: []
+ *    tags:
+ *      - rooms
+ *    summary: read room
+ *    parameters:
+ *    - name: roomId
+ *      in: path
+ *      description: roomId to read
+ *      required: true
+ *      schema:
+ *        type: string
+ *    responses:
+ *      '200':
+ *         description: room detail
+ */
+roomRouter.get("/:roomId", verifySecret(), readRoomController);
 
 module.exports = roomRouter;

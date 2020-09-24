@@ -6,6 +6,7 @@ const { BAD_REQUEST } = require("../utils/constants");
 
 module.exports = () => async (req, res, next) => {
   const secret = req.header("APP_SECRET");
+  console.log(secret);
   try {
     const data = await workspaceModel.findOne({ sdkSecret: secret });
     if (!data) {

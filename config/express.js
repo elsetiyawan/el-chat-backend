@@ -25,7 +25,7 @@ app.use(helmet());
 app.use(cors());
 
 // rate limiter
-app.use(rateLimiter());
+// app.use(rateLimiter());
 
 env === "development" &&
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
