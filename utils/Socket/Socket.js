@@ -55,22 +55,23 @@ const _onConnect = (socket) => {
     const user = users.find((user) => user.socketId === socket.id);
     const formatMsg = await formatMessage(socket.id, message);
     socket.to(room).emit("message", formatMsg);
-    recordChat(room, user.userId, message);
+    recordChat(room, user.userId, message, "group");
   });
 
   socket.on("privateChat", async ({ userId, message }) => {
     const user = users.find((user) => user.userId === userId);
     const from = users.find((user) => user.socketId === socket.id);
     socket.to(user.socketId).emit("message", message);
-    recordChat(user.socketId, from.userId, message);
+    recordChat(user.socketId, from.userId, message, "private");
   });
 };
 
-const recordChat = (room, from, message) => {
+const recordChat = (room, from, message, type) => {
   const chat = new chatModel({
     _roomId: Types.ObjectId(room),
     _from: Types.ObjectId(from),
     message,
+    type,
   });
 
   chat.save();

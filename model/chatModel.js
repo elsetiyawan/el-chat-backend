@@ -15,6 +15,7 @@ const chatSchema = new mongoose.Schema(
     _roomId: { type: Schema.Types.ObjectId },
     _from: { type: Schema.Types.ObjectId },
     message: { type: String },
+    type: { type: String },
   },
   { timestamps: true }
 );
